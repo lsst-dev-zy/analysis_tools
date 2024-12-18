@@ -642,8 +642,10 @@ class ResourceUsageQuantumGraphBuilder(QuantumGraphBuilder):
             Name of the task's output table dataset type.
         """
         if (m := re.fullmatch(r"^(\w+)_metadata$", input_metadata_dataset_type.name)) is None:
+            print(f"aaaaaaaaaaaaaaaaaaaaa input_metadata not matched")
             return
         elif "gatherResourceUsage" in input_metadata_dataset_type.name:
+            print(f"aaaaaaaaaaaaaaaaaaaaa gatherResourceUsage in input_metadata: {input_metadata_dataset_type.name})"
             return
         else:
             input_task_label = m.group(1)
@@ -658,6 +660,7 @@ class ResourceUsageQuantumGraphBuilder(QuantumGraphBuilder):
             task_class=GatherResourceUsageTask,
             config=gather_config,
         )
+        print(f"aaaaaaaaaaaaaaaaaaaaa new task:{gather_task_label}, type:{gather_dataset_type_name}")
         return gather_task_label, gather_dataset_type_name
 
     def process_subgraph(self, subgraph: PipelineGraph) -> QuantumGraphSkeleton:
